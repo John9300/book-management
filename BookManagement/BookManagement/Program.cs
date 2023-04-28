@@ -1,3 +1,4 @@
+using BusinessLogic.Services;
 using DataAccess;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,6 +19,8 @@ namespace BookManagement
 
             var connectionString = "Server=localhost\\SQLEXPRESS;Database=BookManagement;Trusted_Connection=True;TrustServerCertificate=True";
             builder.Services.AddDbContext<DataBaseContext>(options => options.UseSqlServer(connectionString));
+
+            builder.Services.AddTransient<IBookService, BookService>();
 
 
             var app = builder.Build();

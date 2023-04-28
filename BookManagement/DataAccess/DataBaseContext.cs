@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DataAccess.Entitis;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess
 {
@@ -8,5 +9,7 @@ namespace DataAccess
         {
             Database.EnsureCreated();
         }
+        
+        public DbSet<Book> Books { get; set; }
     }
 }
