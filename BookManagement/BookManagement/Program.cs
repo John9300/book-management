@@ -1,3 +1,6 @@
+using DataAccess;
+using Microsoft.EntityFrameworkCore;
+
 namespace BookManagement
 {
     public class Program
@@ -12,6 +15,10 @@ namespace BookManagement
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            var connectionString = "Server=localhost\\SQLEXPRESS;Database=BookManagement;Trusted_Connection=True;TrustServerCertificate=True";
+            builder.Services.AddDbContext<DataBaseContext>(options => options.UseSqlServer(connectionString));
+
 
             var app = builder.Build();
 
