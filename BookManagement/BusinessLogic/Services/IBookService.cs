@@ -1,10 +1,10 @@
-﻿using DataAccess.Entitis;
+﻿using BusinessLogic.Models;
 
 namespace BusinessLogic.Services
 {
     public interface IBookService
     {
-        List<Book> GetAll();
-        void Add(Book book);
+        List<BookGetModel> GetAll();
+        void Add(BookAddModel model);
     }
 }

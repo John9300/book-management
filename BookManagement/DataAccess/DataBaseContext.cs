@@ -11,5 +11,11 @@ namespace DataAccess
         }
         
         public DbSet<Book> Books { get; set; }
+
+
+        int aaa()
+        {
+            return 4;
+        }
     }
 }

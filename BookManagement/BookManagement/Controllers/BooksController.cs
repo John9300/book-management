@@ -1,4 +1,5 @@
-﻿using BusinessLogic.Services;
+﻿using BusinessLogic.Models;
+using BusinessLogic.Services;
 using DataAccess.Entitis;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,9 +25,9 @@ namespace BookManagement.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddBook([FromBody] Book book)
+        public IActionResult AddBook([FromBody] BookAddModel model)
         {
-            _bookService.Add(book);
+            _bookService.Add(model);
 
             return Ok();
         }

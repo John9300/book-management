@@ -1,4 +1,5 @@
-﻿using DataAccess;
+﻿using BusinessLogic.Models;
+using DataAccess;
 using DataAccess.Entitis;
 using System;
 using System.Collections.Generic;
@@ -17,15 +18,36 @@ namespace BusinessLogic.Services
             _context = context;
         }
 
-        public void Add(Book book)
+        public void Add(BookAddModel model)
         {
-            _context.Books.Add(book);
-            _context.SaveChanges();
+            for (var i = 0; i < model.Copies; i++)
+            {
+                var entity = new Book
+                {
+                    Id = Guid.NewGuid(),
+                    Name = model.Name,
+                    Author = model.Author,
+                    PublishDate = model.PublishDate,
+                    IsEBook = model.IsEBook
+                };
+
+                _context.Books.Add(entity);
+                _context.SaveChanges();
+            }
         }
 
-        public List<Book> GetAll()
+        public List<BookGetModel> GetAll()
         {
-            var result = _context.Books.ToList();
+            var entities = _context.Books;
+
+            var result = entities.Select(book => new BookGetModel
+            {
+                Id = book.Id,
+                Name = book.Name,
+                Author = book.Author,
+                PublishDate = book.PublishDate,
+                IsEBook = book.IsEBook
+            }).ToList();
 
             return result;
         }
