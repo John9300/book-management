@@ -51,5 +51,26 @@ namespace BusinessLogic.Services
 
             return result;
         }
+
+        public BookGetModel GetById(Guid id)
+        {
+            var entity = _context.Books.Where(b => b.Id == id).FirstOrDefault();
+           
+            if(entity == null)
+            {
+                return null;
+            }
+
+            var model = new BookGetModel
+            {
+                Id = entity.Id,
+                Name = entity.Name,
+                Author = entity.Author,
+                PublishDate = entity.PublishDate,
+                IsEBook = entity.IsEBook
+            };
+
+            return model;
+        }
     }
 }

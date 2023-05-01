@@ -1,6 +1,7 @@
 ﻿using BusinessLogic.Models;
 using BusinessLogic.Services;
 using DataAccess.Entitis;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookManagement.Controllers
@@ -24,6 +25,19 @@ namespace BookManagement.Controllers
             return Ok(result);
         }
 
+        [HttpGet("{id}")]
+        public IActionResult GetById(Guid id) 
+        {
+            var result = _bookService.GetById(id);
+            
+            if(result == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(result);
+        }
+
         [HttpPost]
         public IActionResult AddBook([FromBody] BookAddModel model)
         {
@@ -31,5 +45,6 @@ namespace BookManagement.Controllers
 
             return Ok();
         }
+        
     }
 }
